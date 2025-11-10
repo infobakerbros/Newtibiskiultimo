@@ -1,4 +1,6 @@
 import { useState } from "react";
+console.log("🔥 Tibiski nueva versión activa");
+
 
 const products = [
   { id: 1, name: "Tibiskis Originales (12u)", price: 8.5 },
