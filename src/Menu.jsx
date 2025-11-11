@@ -88,28 +88,27 @@ const Menu = () => {
       }}
     >
       {/* LOGOS */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "25px",
-          marginBottom: "30px",
-        }}
-      >
-        <img
-          src="/logo.png"
-          alt="Logo verde"
-          style={{ height: "80px", width: "auto" }}
-        />
-        <img
-          src="/baker-logo.png"
-          alt="Baker Bros Logo"
-          style={{ height: "65px", width: "auto" }}
-        />
-      </div>
-
-      {/* TITULO */}
+<div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "25px",
+    marginBottom: "30px",
+  }}
+>
+  <img
+    src="/logo.png"
+    alt="Logo verde"
+    style={{ height: "80px", width: "auto" }}
+  />
+  <img
+    src="/baker-logo.png"
+    alt="Baker Bros Logo"
+    style={{ height: "65px", width: "auto" }}
+  />
+</div>
+     {/* TITULO */}
       <h1
         style={{
           fontSize: "3.2rem",
