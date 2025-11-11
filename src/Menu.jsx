@@ -48,7 +48,29 @@ const Menu = () => {
         color: "#fff",
       }}
     >
-      {/* ENCABEZADO PRINCIPAL */}
+      {/* ENCABEZADO CON LOGOS */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "25px",
+          marginBottom: "30px",
+        }}
+      >
+        <img
+          src="/logo.png"
+          alt="Logo verde"
+          style={{ height: "80px", width: "auto" }}
+        />
+        <img
+          src="/baker-logo.png"
+          alt="Baker Bros Logo"
+          style={{ height: "65px", width: "auto" }}
+        />
+      </div>
+
+      {/* TÍTULO PRINCIPAL */}
       <h1
         style={{
           fontSize: "3.2rem",
@@ -94,79 +116,4 @@ const Menu = () => {
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr auto",
                     alignItems: "center",
-                    backgroundColor: "#104c30",
-                    borderRadius: "12px",
-                    padding: "10px 20px",
-                    width: "80%",
-                    maxWidth: "400px",
-                    boxShadow: "0px 3px 10px rgba(0,0,0,0.3)",
-                  }}
-                >
-                  <p>Cant. {item.cantidad}</p>
-                  <p>${item.precio.toFixed(2)}</p>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                    }}
-                  >
-                    <button
-                      onClick={() => updateCart(key, -1)}
-                      style={{
-                        backgroundColor: "#f5b942",
-                        border: "none",
-                        borderRadius: "50%",
-                        width: "28px",
-                        height: "28px",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                      }}
-                    >
-                      –
-                    </button>
-                    <span>{cart[key] || 0}</span>
-                    <button
-                      onClick={() => updateCart(key, 1)}
-                      style={{
-                        backgroundColor: "#f5b942",
-                        border: "none",
-                        borderRadius: "50%",
-                        width: "28px",
-                        height: "28px",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                      }}
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-
-      {/* TOTAL */}
-      <div style={{ marginTop: "20px" }}>
-        <h3>Total: ${total.toFixed(2)}</h3>
-        <button
-          style={{
-            backgroundColor: "#f5b942",
-            border: "none",
-            borderRadius: "10px",
-            padding: "10px 20px",
-            fontWeight: "bold",
-            cursor: "pointer",
-            boxShadow: "0px 2px 8px rgba(0,0,0,0.3)",
-          }}
-        >
-          Confirmar Pedido
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default Menu;
+                    
