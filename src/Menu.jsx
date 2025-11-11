@@ -25,17 +25,37 @@ const Menu = () => {
     },
   ];
 
-  const updateCart = (item, delta) => {
+  // ✅ Función para sumar/restar correctamente
+  const updateCart = (sectionTitle, item, delta) => {
+    const key = `${sectionTitle}-${item.cantidad}`;
     setCart((prev) => ({
       ...prev,
-      [item]: Math.max(0, (prev[item] || 0) + delta),
+      [key]: Math.max(0, (prev[key] || 0) + delta),
     }));
   };
 
-  const total = Object.entries(cart).reduce(
-    (acc, [key, value]) => acc + value * parseFloat(key.split("$")[1]),
-    0
-  );
+  // ✅ Calcular total correctamente
+  const total = Object.entries(cart).reduce((acc, [key, quantity]) => {
+    const [sectionTitle, cantidad] = key.split("-");
+    const section = sections.find((s) => s.title === sectionTitle);
+    const item = section?.items.find(
+      (i) => i.cantidad === parseInt(cantidad, 10)
+    );
+    return acc + (item ? item.precio * quantity : 0);
+  }, 0);
+
+  // ✅ Acción del botón “Confirmar Pedido”
+  const confirmarPedido = () => {
+    if (total === 0) {
+      alert("Por favor selecciona al menos un producto 🥐");
+    } else {
+      alert(
+        `Tu pedido ha sido confirmado!\nTotal: $${total.toFixed(
+          2
+        )}\nGracias por apoyar a Baker Bros. 😍`
+      );
+    }
+  };
 
   return (
     <div
@@ -48,7 +68,7 @@ const Menu = () => {
         color: "#fff",
       }}
     >
-      {/* ENCABEZADO CON LOGOS */}
+      {/* LOGOS ARRIBA */}
       <div
         style={{
           display: "flex",
@@ -99,21 +119,44 @@ const Menu = () => {
             {section.title}
           </h2>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            {section.items.map((item) => {
-              const key = `${section.title}-${item.precio}`;
-              return (
+          {section.items.map((item) => {
+            const key = `${section.title}-${item.cantidad}`;
+            return (
+              <div
+                key={key}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr auto",
+                  alignItems: "center",
+                  backgroundColor: "#104c30",
+                  borderRadius: "12px",
+                  padding: "10px 20px",
+                  width: "80%",
+                  maxWidth: "400px",
+                  margin: "0 auto 10px auto",
+                  boxShadow: "0px 3px 10px rgba(0,0,0,0.3)",
+                }}
+              >
+                <p>Cant. {item.cantidad}</p>
+                <p>${item.precio.toFixed(2)}</p>
                 <div
-                  key={key}
                   style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr auto",
+                    display: "flex",
                     alignItems: "center",
-                    
+                    gap: "8px",
+                  }}
+                >
+                  <button
+                    onClick={() => updateCart(section.title, item, -1)}
+                    style={{
+                      backgroundColor: "#f5b942",
+                      border: "none",
+                      borderRadius: "50%",
+                      width: "28px",
+                      height: "28px",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
+                    –
+                  </button>
