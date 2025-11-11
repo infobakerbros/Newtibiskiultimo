@@ -116,5 +116,211 @@ const Menu = () => {
           color: "#f8c94e",
           fontWeight: "800",
           textShadow: "3px 3px 0px #000",
-          letterSpac
-          
+          letterSpacing: "2px",
+          marginBottom: "40px",
+        }}
+      >
+        MENÚ
+      </h1>
+
+      {/* SECCIONES */}
+      {sections.map((section) => (
+        <div key={section.title} style={{ marginBottom: "40px" }}>
+          <h2
+            style={{
+              color: "#f5b942",
+              fontSize: "2rem",
+              letterSpacing: "1px",
+              textShadow: "1px 1px 0px #000",
+              marginBottom: "20px",
+            }}
+          >
+            {section.title}
+          </h2>
+
+          {section.items.map((item) => {
+            const key = `${section.title}-${item.cantidad}`;
+            return (
+              <div
+                key={key}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr auto",
+                  alignItems: "center",
+                  backgroundColor: "#104c30",
+                  borderRadius: "12px",
+                  padding: "10px 20px",
+                  width: "80%",
+                  maxWidth: "400px",
+                  margin: "0 auto 10px auto",
+                  boxShadow: "0px 3px 10px rgba(0,0,0,0.3)",
+                }}
+              >
+                <p>Cant. {item.cantidad}</p>
+                <p>${item.precio.toFixed(2)}</p>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                  }}
+                >
+                  <button
+                    onClick={() => updateCart(section.title, item, -1)}
+                    style={{
+                      backgroundColor: "#f5b942",
+                      border: "none",
+                      borderRadius: "50%",
+                      width: "28px",
+                      height: "28px",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
+                    –
+                  </button>
+                  <span>{cart[key] || 0}</span>
+                  <button
+                    onClick={() => updateCart(section.title, item, 1)}
+                    style={{
+                      backgroundColor: "#f5b942",
+                      border: "none",
+                      borderRadius: "50%",
+                      width: "28px",
+                      height: "28px",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ))}
+
+      {/* TOTAL Y BOTÓN */}
+      <div style={{ marginTop: "30px" }}>
+        <h3>Total: ${total.toFixed(2)}</h3>
+        <button
+          onClick={confirmarPedido}
+          style={{
+            backgroundColor: "#f5b942",
+            border: "none",
+            borderRadius: "10px",
+            padding: "12px 25px",
+            fontWeight: "bold",
+            cursor: "pointer",
+            boxShadow: "0px 2px 8px rgba(0,0,0,0.3)",
+            fontSize: "1rem",
+          }}
+        >
+          Confirmar Pedido
+        </button>
+      </div>
+
+      {/* ✅ POPUP */}
+      {showPopup && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0, 0, 0, 0.7)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+          }}
+          onClick={() => setShowPopup(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: "#104c30",
+              padding: "30px",
+              borderRadius: "20px",
+              textAlign: "center",
+              color: "#fff",
+              width: "85%",
+              maxWidth: "400px",
+              boxShadow: "0px 4px 12px rgba(0,0,0,0.4)",
+            }}
+          >
+            <img
+              src="/tibiski.png"
+              alt="Tibiski"
+              style={{ width: "120px", marginBottom: "15px" }}
+            />
+            <h2 style={{ color: "#f5b942", marginBottom: "15px" }}>
+              Confirmar Pedido 🥐
+            </h2>
+
+            <input
+              name="nombre"
+              placeholder="Nombre"
+              value={formData.nombre}
+              onChange={handleInputChange}
+              style={{
+                width: "90%",
+                padding: "10px",
+                borderRadius: "10px",
+                border: "none",
+                marginBottom: "10px",
+                textAlign: "center",
+              }}
+            />
+            <input
+              name="telefono"
+              placeholder="Número de teléfono"
+              value={formData.telefono}
+              onChange={handleInputChange}
+              style={{
+                width: "90%",
+                padding: "10px",
+                borderRadius: "10px",
+                border: "none",
+                marginBottom: "10px",
+                textAlign: "center",
+              }}
+            />
+            <input
+              name="ubicacion"
+              placeholder="Ubicación"
+              value={formData.ubicacion}
+              onChange={handleInputChange}
+              style={{
+                width: "90%",
+                padding: "10px",
+                borderRadius: "10px",
+                border: "none",
+                marginBottom: "15px",
+                textAlign: "center",
+              }}
+            />
+
+            <button
+              onClick={enviarPedido}
+              style={{
+                backgroundColor: "#f5b942",
+                border: "none",
+                borderRadius: "10px",
+                padding: "10px 20px",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
+            >
+              Enviar Pedido
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Menu;
