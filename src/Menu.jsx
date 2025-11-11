@@ -51,7 +51,7 @@ const Menu = () => {
 
   const confirmarPedido = () => {
     if (total === 0) {
-      alert("Por favor selecciona al menos un producto 🥐");
+      alert("Por favor selecciona al menos un producto");
     } else {
       setShowPopup(true);
     }
@@ -69,7 +69,7 @@ const Menu = () => {
     alert(
       `✅ Pedido confirmado\n\nCliente: ${formData.nombre}\nTeléfono: ${formData.telefono}\nUbicación: ${formData.ubicacion}\nTotal: $${total.toFixed(
         2
-      )}\n\nGracias por tu compra 🥐`
+      )}\n\nGracias por tu compra`
     );
     setShowPopup(false);
     setCart({});
