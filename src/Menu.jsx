@@ -221,7 +221,7 @@ const Menu = () => {
         </button>
       </div>
 
-      {/* ✅ POPUP */}
+      {/* POPUP */}
       {showPopup && (
         <div
           style={{
@@ -254,10 +254,14 @@ const Menu = () => {
             <img
               src="/tibiski.png"
               alt="Tibiski"
-              style={{ width: "120px", marginBottom: "15px" }}
+              style={{
+                width: "130px",
+                margin: "0 auto 15px auto",
+                display: "block",
+              }}
             />
             <h2 style={{ color: "#f5b942", marginBottom: "15px" }}>
-              Confirmar Pedido 🥐
+              Confirmar Pedido
             </h2>
 
             <input
@@ -272,6 +276,7 @@ const Menu = () => {
                 border: "none",
                 marginBottom: "10px",
                 textAlign: "center",
+                color: "#000", // texto negro visible
               }}
             />
             <input
@@ -286,6 +291,7 @@ const Menu = () => {
                 border: "none",
                 marginBottom: "10px",
                 textAlign: "center",
+                color: "#000",
               }}
             />
             <input
@@ -300,6 +306,7 @@ const Menu = () => {
                 border: "none",
                 marginBottom: "15px",
                 textAlign: "center",
+                color: "#000",
               }}
             />
 
