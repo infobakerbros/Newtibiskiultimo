@@ -1,11 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tibiski Orders</title>
+    <title>Menú Tibiski 🥐</title>
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <!-- Fuente parecida a la del menú -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #0f3b2f;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+      }
+      header {
+        text-align: center;
+        padding: 20px;
+      }
+      header img {
+        width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+      h1 {
+        color: #f5b942;
+        font-weight: 800;
+        margin-bottom: 10px;
+      }
+      #root {
+        padding-bottom: 60px;
+      }
+    </style>
   </head>
-  <body class="bg-tibiskiGreen text-white">
+
+  <body>
+    <header>
+      <img src="/logo.png" alt="Tibiski Logo" />
+      <h1>Menú Tibiski 🥐</h1>
+    </header>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
