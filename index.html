@@ -2,7 +2,10 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Menú Tibiski 🥐</title>
     <link rel="icon" type="image/png" href="/logo.png" />
 
@@ -20,32 +23,28 @@
         color: #fff;
       }
 
-      <header
-  style="
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-  "
->
-  <img
-    src="/logo.png"
-    alt="Logo verde"
-    style="height: 70px; width: auto;"
-  />
-  <img
-    src="/baker-logo.png"
-    alt="Baker Bros logo"
-    style="height: 50px; width: auto;"
-  />
-</header>
-      
+      header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 20px;
+      }
+
+      header img {
+        height: 65px;
+        width: auto;
+      }
+    </style>
+  </head>
 
   <body>
+    <!-- ✅ Logos juntos arriba -->
     <header>
-      <img src="/logo.png" alt="Tibiski Logo" />
-      <h1>MENÚ</h1>
+      <img src="/logo.png" alt="Logo verde" />
+      <img src="/baker-logo.png" alt="Logo Baker Bros" />
     </header>
+
+    <!-- Aquí va la app React -->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
