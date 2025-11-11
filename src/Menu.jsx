@@ -2,6 +2,13 @@ import React, { useState } from "react";
 
 const Menu = () => {
   const [cart, setCart] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
+  const [formData, setFormData] = useState({
+    nombre: "",
+    telefono: "",
+    ubicacion: "",
+  });
+
   const sections = [
     {
       title: "TIBISKIS ORIGINALES",
@@ -25,7 +32,6 @@ const Menu = () => {
     },
   ];
 
-  // ✅ Función para sumar/restar correctamente
   const updateCart = (sectionTitle, item, delta) => {
     const key = `${sectionTitle}-${item.cantidad}`;
     setCart((prev) => ({
@@ -34,7 +40,6 @@ const Menu = () => {
     }));
   };
 
-  // ✅ Calcular total correctamente
   const total = Object.entries(cart).reduce((acc, [key, quantity]) => {
     const [sectionTitle, cantidad] = key.split("-");
     const section = sections.find((s) => s.title === sectionTitle);
@@ -44,17 +49,31 @@ const Menu = () => {
     return acc + (item ? item.precio * quantity : 0);
   }, 0);
 
-  // ✅ Acción del botón “Confirmar Pedido”
   const confirmarPedido = () => {
     if (total === 0) {
       alert("Por favor selecciona al menos un producto 🥐");
     } else {
-      alert(
-        `Tu pedido ha sido confirmado!\nTotal: $${total.toFixed(
-          2
-        )}\nGracias por apoyar a Baker Bros. 😍`
-      );
+      setShowPopup(true);
     }
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const enviarPedido = () => {
+    if (!formData.nombre || !formData.telefono || !formData.ubicacion) {
+      alert("Por favor completa todos los campos 📋");
+      return;
+    }
+    alert(
+      `✅ Pedido confirmado\n\nCliente: ${formData.nombre}\nTeléfono: ${formData.telefono}\nUbicación: ${formData.ubicacion}\nTotal: $${total.toFixed(
+        2
+      )}\n\nGracias por tu compra 🥐`
+    );
+    setShowPopup(false);
+    setCart({});
+    setFormData({ nombre: "", telefono: "", ubicacion: "" });
   };
 
   return (
@@ -68,7 +87,7 @@ const Menu = () => {
         color: "#fff",
       }}
     >
-      {/* LOGOS ARRIBA */}
+      {/* LOGOS */}
       <div
         style={{
           display: "flex",
@@ -90,73 +109,12 @@ const Menu = () => {
         />
       </div>
 
-      {/* TÍTULO PRINCIPAL */}
+      {/* TITULO */}
       <h1
         style={{
           fontSize: "3.2rem",
           color: "#f8c94e",
           fontWeight: "800",
           textShadow: "3px 3px 0px #000",
-          letterSpacing: "2px",
-          marginBottom: "40px",
-        }}
-      >
-        MENÚ
-      </h1>
-
-      {/* SECCIONES */}
-      {sections.map((section) => (
-        <div key={section.title} style={{ marginBottom: "40px" }}>
-          <h2
-            style={{
-              color: "#f5b942",
-              fontSize: "2rem",
-              letterSpacing: "1px",
-              textShadow: "1px 1px 0px #000",
-              marginBottom: "20px",
-            }}
-          >
-            {section.title}
-          </h2>
-
-          {section.items.map((item) => {
-            const key = `${section.title}-${item.cantidad}`;
-            return (
-              <div
-                key={key}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr auto",
-                  alignItems: "center",
-                  backgroundColor: "#104c30",
-                  borderRadius: "12px",
-                  padding: "10px 20px",
-                  width: "80%",
-                  maxWidth: "400px",
-                  margin: "0 auto 10px auto",
-                  boxShadow: "0px 3px 10px rgba(0,0,0,0.3)",
-                }}
-              >
-                <p>Cant. {item.cantidad}</p>
-                <p>${item.precio.toFixed(2)}</p>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                  }}
-                >
-                  <button
-                    onClick={() => updateCart(section.title, item, -1)}
-                    style={{
-                      backgroundColor: "#f5b942",
-                      border: "none",
-                      borderRadius: "50%",
-                      width: "28px",
-                      height: "28px",
-                      fontWeight: "bold",
-                      cursor: "pointer",
-                    }}
-                  >
-                    –
-                  </button>
+          letterSpac
+          
