@@ -119,6 +119,28 @@ const Menu = () => {
           marginBottom: "40px",
         }}
       >
+     {/* BARRA SUPERIOR CON LOGO */}
+<div
+  style={{
+    backgroundColor: "#0d3e26",
+    padding: "12px 0",
+    marginBottom: "25px",
+    borderRadius: "0 0 12px 12px",
+    boxShadow: "0px 2px 6px rgba(0,0,0,0.3)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
+  <img
+    src="/baker-logo.png"
+    alt="Logo Tibiski"
+    style={{
+      height: "55px",
+      width: "auto",
+    }}
+  />
+</div>       
         MENÚ
       </h1>
 
@@ -310,23 +332,45 @@ const Menu = () => {
             />
 
             <button
-              onClick={enviarPedido}
-              style={{
-                backgroundColor: "#f5b942",
-                border: "none",
-                borderRadius: "10px",
-                padding: "10px 20px",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              Enviar Pedido
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Menu;
+  onClick={() => {
+    setPedidoConfirmado(true);
+  }}
+  style={{
+    backgroundColor: "#f5b942",
+    border: "none",
+    borderRadius: "10px",
+    padding: "10px 20px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    color: "#000",
+  }}
+>
+  Confirmar Pedido
+</button>
+{/* Mensaje de confirmación dentro del popup */}
+{pedidoConfirmado && (
+  <div
+    style={{
+      marginTop: "20px",
+      backgroundColor: "#fff",
+      padding: "15px",
+      borderRadius: "10px",
+      color: "#000",
+      textAlign: "center",
+      fontSize: "1rem",
+      boxShadow: "0px 2px 6px rgba(0,0,0,0.2)",
+    }}
+  >
+    <p>✅ Pedido confirmado</p>
+    <p><strong>Cliente:</strong> {formData.nombre}</p>
+    <p><strong>Teléfono:</strong> {formData.telefono}</p>
+    <p><strong>Ubicación:</strong> {formData.ubicacion}</p>
+    <hr style={{ margin: "10px 0" }} />
+    <p>
+      💳 Realiza tu pago por <strong>Yappy</strong> al número{" "}
+      <strong>6317-0993</strong>, o por <strong>transferencia o efectivo</strong> el día de la entrega.
+    </p>
+    <p> ¡Gracias por tu compra!</p>
+  </div>
+)}
+            
