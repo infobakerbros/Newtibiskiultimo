@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const Menu = () => {
   const [cart, setCart] = useState({});
   const [showPopup, setShowPopup] = useState(false);
+  const [pedidoConfirmado, setPedidoConfirmado] = useState(false); // ✅ faltaba esta línea
   const [formData, setFormData] = useState({
     nombre: "",
     telefono: "",
@@ -51,7 +52,7 @@ const Menu = () => {
 
   const confirmarPedido = () => {
     if (total === 0) {
-      alert("Por favor selecciona al menos un producto");
+      alert("Por favor selecciona al menos un producto 🥐");
     } else {
       setShowPopup(true);
     }
@@ -59,21 +60,6 @@ const Menu = () => {
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const enviarPedido = () => {
-    if (!formData.nombre || !formData.telefono || !formData.ubicacion) {
-      alert("Por favor completa todos los campos 📋");
-      return;
-    }
-    alert(
-      `✅ Pedido confirmado\n\nCliente: ${formData.nombre}\nTeléfono: ${formData.telefono}\nUbicación: ${formData.ubicacion}\nTotal: $${total.toFixed(
-        2
-      )}\n\nGracias por tu compra`
-    );
-    setShowPopup(false);
-    setCart({});
-    setFormData({ nombre: "", telefono: "", ubicacion: "" });
   };
 
   return (
@@ -87,28 +73,30 @@ const Menu = () => {
         color: "#fff",
       }}
     >
-      {/* LOGOS */}
-<div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "25px",
-    marginBottom: "30px",
-  }}
->
-  <img
-    src="/logo.png"
-    alt="Logo verde"
-    style={{ height: "80px", width: "auto" }}
-  />
-  <img
-    src="/baker-logo.png"
-    alt="Baker Bros Logo"
-    style={{ height: "65px", width: "auto" }}
-  />
-</div>
-     {/* TITULO */}
+      {/* Logo Superior */}
+      <div
+        style={{
+          backgroundColor: "#0d3e26",
+          padding: "12px 0",
+          marginBottom: "25px",
+          borderRadius: "0 0 12px 12px",
+          boxShadow: "0px 2px 6px rgba(0,0,0,0.3)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src="/baker-logo.png"
+          alt="Logo Tibiski"
+          style={{
+            height: "55px",
+            width: "auto",
+          }}
+        />
+      </div>
+
+      {/* Título */}
       <h1
         style={{
           fontSize: "3.2rem",
@@ -119,32 +107,10 @@ const Menu = () => {
           marginBottom: "40px",
         }}
       >
-     {/* BARRA SUPERIOR CON LOGO */}
-<div
-  style={{
-    backgroundColor: "#0d3e26",
-    padding: "12px 0",
-    marginBottom: "25px",
-    borderRadius: "0 0 12px 12px",
-    boxShadow: "0px 2px 6px rgba(0,0,0,0.3)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  }}
->
-  <img
-    src="/baker-logo.png"
-    alt="Logo Tibiski"
-    style={{
-      height: "55px",
-      width: "auto",
-    }}
-  />
-</div>       
         MENÚ
       </h1>
 
-      {/* SECCIONES */}
+      {/* Secciones */}
       {sections.map((section) => (
         <div key={section.title} style={{ marginBottom: "40px" }}>
           <h2
@@ -222,7 +188,7 @@ const Menu = () => {
         </div>
       ))}
 
-      {/* TOTAL Y BOTÓN */}
+      {/* Total */}
       <div style={{ marginTop: "30px" }}>
         <h3>Total: ${total.toFixed(2)}</h3>
         <button
@@ -240,9 +206,12 @@ const Menu = () => {
         >
           Confirmar Pedido
         </button>
+        <p style={{ marginTop: "10px", fontSize: "0.9rem", opacity: 0.8 }}>
+          ⚠️ Los precios no incluyen servicio de entrega.
+        </p>
       </div>
 
-      {/* POPUP */}
+      {/* Popup */}
       {showPopup && (
         <div
           style={{
@@ -297,7 +266,7 @@ const Menu = () => {
                 border: "none",
                 marginBottom: "10px",
                 textAlign: "center",
-                color: "#000", // texto negro visible
+                color: "#000",
               }}
             />
             <input
@@ -332,45 +301,52 @@ const Menu = () => {
             />
 
             <button
-  onClick={() => {
-    setPedidoConfirmado(true);
-  }}
-  style={{
-    backgroundColor: "#f5b942",
-    border: "none",
-    borderRadius: "10px",
-    padding: "10px 20px",
-    fontWeight: "bold",
-    cursor: "pointer",
-    color: "#000",
-  }}
->
-  Confirmar Pedido
-</button>
-{/* Mensaje de confirmación dentro del popup */}
-{pedidoConfirmado && (
-  <div
-    style={{
-      marginTop: "20px",
-      backgroundColor: "#fff",
-      padding: "15px",
-      borderRadius: "10px",
-      color: "#000",
-      textAlign: "center",
-      fontSize: "1rem",
-      boxShadow: "0px 2px 6px rgba(0,0,0,0.2)",
-    }}
-  >
-    <p>✅ Pedido confirmado</p>
-    <p><strong>Cliente:</strong> {formData.nombre}</p>
-    <p><strong>Teléfono:</strong> {formData.telefono}</p>
-    <p><strong>Ubicación:</strong> {formData.ubicacion}</p>
-    <hr style={{ margin: "10px 0" }} />
-    <p>
-      💳 Realiza tu pago por <strong>Yappy</strong> al número{" "}
-      <strong>6317-0993</strong>, o por <strong>transferencia o efectivo</strong> el día de la entrega.
-    </p>
-    <p> ¡Gracias por tu compra!</p>
-  </div>
-)}
-            
+              onClick={() => setPedidoConfirmado(true)}
+              style={{
+                backgroundColor: "#f5b942",
+                border: "none",
+                borderRadius: "10px",
+                padding: "10px 20px",
+                fontWeight: "bold",
+                cursor: "pointer",
+                color: "#000",
+              }}
+            >
+              Confirmar Pedido
+            </button>
+
+            {/* Mensaje de confirmación */}
+            {pedidoConfirmado && (
+              <div
+                style={{
+                  marginTop: "20px",
+                  backgroundColor: "#fff",
+                  padding: "15px",
+                  borderRadius: "10px",
+                  color: "#000",
+                  textAlign: "center",
+                  fontSize: "1rem",
+                  boxShadow: "0px 2px 6px rgba(0,0,0,0.2)",
+                }}
+              >
+                <p>✅ Pedido confirmado</p>
+                <p><strong>Cliente:</strong> {formData.nombre}</p>
+                <p><strong>Teléfono:</strong> {formData.telefono}</p>
+                <p><strong>Ubicación:</strong> {formData.ubicacion}</p>
+                <hr style={{ margin: "10px 0" }} />
+                <p>
+                  💳 Realiza tu pago por <strong>Yappy</strong> al número{" "}
+                  <strong>6317-0993</strong>, o por{" "}
+                  <strong>transferencia o efectivo</strong> el día de la entrega.
+                </p>
+                <p>🥐 ¡Gracias por tu compra!</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Menu;
