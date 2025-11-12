@@ -339,7 +339,7 @@ const Menu = () => {
                   <strong>6317-0993</strong>, o por{" "}
                   <strong>transferencia o efectivo</strong> el día de la entrega.
                 </p>
-                <p>🥐 ¡Gracias por tu compra!</p>
+                <p> ¡Gracias por tu compra!</p>
               </div>
             )}
           </div>
